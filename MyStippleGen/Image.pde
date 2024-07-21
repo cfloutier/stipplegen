@@ -112,22 +112,22 @@ class ImageGUI extends GUIPanel
         
         select_bt = addButton("Select Source Image");
         select_bt.plugTo(this, "SelectSourceImage");
+        
+        file_Label = inlineLabel("File Label", 200);   
+        
+        nextLine();
+        
         //select_bt = addButton("Select Source Image");
         //select_bt.plugTo("LoadJson");
-        
         
         // cp5.addButton("LoadJson")
         // .setPosition(xPos, yPos)
         // .setSize(200, 200)
         // .moveTo("Files");    
 
-
-        file_Label = addLabel("File Label");            
-        nextLine();
-        
         Width = addSlider("Width", "Width", data, 200, 2000, true); 
         ImageAlpha = addSlider("ImageAlpha", "Image Alpha", data, 0, 255, true);
-        
+         nextLine();
         Blur = addIntSlider("Blur", "Blur", data, 1, 20, true);
         
        // updateUI();

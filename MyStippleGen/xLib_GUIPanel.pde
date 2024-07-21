@@ -35,6 +35,25 @@ class GUIPanel implements ControlListener
   public void controlEvent(ControlEvent theEvent) {
     onUIChanged();
   }
+  
+  
+  
+  
+
+  Textlabel inlineLabel(String content, int width)
+  {
+    Textlabel l = cp5.addTextlabel("Label" + indexControler)
+      .setText(content)
+      .setPosition(xPos, yPos)
+      .setSize(width, heightCtrl)
+      .moveTo(pageName);
+  
+    xPos += width;
+
+    indexControler++;
+
+    return l;
+  }
 
   Textlabel addLabel(String content)
   {
@@ -142,17 +161,21 @@ class GUIPanel implements ControlListener
 
   Button addButton(String name)
   {
+    
+    int width_bt = 100;
+    
     Button bt = cp5.addButton(name + indexControler)
       .setPosition(xPos, yPos)
       .setLabel(name)
-      .setSize(100, heightCtrl)
+      .setSize(width_bt, heightCtrl)
       .moveTo(pageName);
+      
+    xPos += width_bt+5;
 
     indexControler++;
-    yPos+=heightCtrl+5;
-
     return bt;
   }
+  
   
   void start()
   {
@@ -160,7 +183,7 @@ class GUIPanel implements ControlListener
     yPos = 20;
   }
   
-  void nextLine()
+   void nextLine()
   {
     xPos = 20;
     yPos += heightCtrl + 1;
