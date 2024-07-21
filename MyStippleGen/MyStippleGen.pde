@@ -43,9 +43,11 @@ import processing.pdf.*;
 import processing.dxf.*;
 import processing.svg.*;
  
-DrawingData data;
+DataGlobal data;
 DataGUI dataGui;
 DrawingGenerator drawer;
+
+
 //SourceFiles sourceFilesGui;
 PGraphics current_graphics;
 
@@ -53,12 +55,12 @@ ControlP5 cp5;
 
 void setup() 
 {
-  size(1200, 800);
+  size(1200, 800); //<>//
 
   drawer =  new DrawingGenerator();
 
-  data = new DrawingData();
-  dataGui = new DataGUI();
+  data = new DataGlobal();
+  dataGui = new DataGUI(data);
   
   setupControls();
    
@@ -71,7 +73,7 @@ void setup()
 
 void setupControls()
 { 
-  cp5 = new ControlP5(this);  //<>//
+  cp5 = new ControlP5(this); 
   cp5.getTab("default").setLabel("Hide GUI");
 
   dataGui.setupControls( );     

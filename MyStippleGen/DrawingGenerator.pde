@@ -2,10 +2,10 @@
 
 class Cell
 {
-    DrawingData data;
+    DataDots data;
     PVector pos;
     float value;
-    Cell(DrawingData data, PVector pos, float value)
+    Cell(DataDots data, PVector pos, float value)
     {
       this.data =  data;
       this.pos = pos;
@@ -66,18 +66,18 @@ class DrawingGenerator
     
     void buildBlurredImage()
     {
-      if (last_blur != data.Blur || 
-          last_width != data.Width ||   
+      if (last_blur != data.image.Blur || 
+          last_width != data.image.Width ||   
           blurred_image == null)
       {
-        blurred_image = data.image.copy();
-        blurred_image.resize((int)data.Width, (int)data.Height());
-        blurred_image.filter(BLUR, data.Blur);
+        blurred_image = data.image.image.copy();
+        blurred_image.resize((int)data.image.Width, (int)data.image.Height());
+        blurred_image.filter(BLUR, data.image.Blur);
         
         println("build blur");
 
-        last_blur = data.Blur;
-        last_width = data.Width;
+        last_blur = data.image.Blur;
+        last_width = data.image.Width;
         
         cells.clear();     
       }
@@ -95,35 +95,35 @@ class DrawingGenerator
     
     void buildCells(PVector center)
     {
-        if (last_CellSize != data.CellSize || 
+        if (last_CellSize != data.dots.CellSize || 
             cells.size() == 0)
         {
                cells.clear();
                println("build cells");
         
-            float xPos = data.CellSize/2;
-            float yPos = data.CellSize/2;
+            float xPos = data.dots.CellSize/2;
+            float yPos = data.dots.CellSize/2;
             
-            Height = round(data.Height());
-            start_pos = new PVector(center.x - data.Width/2, center.y - data.Height()/2);
+            Height = round(data.image.Height());
+            start_pos = new PVector(center.x - data.image.Width/2, center.y - data.image.Height()/2);
             
             while( yPos < Height)
             {
-              while( xPos < data.Width)
+              while( xPos < data.image.Width)
               {
                 float value = red(blurred_image.get((int)xPos, (int)yPos));
-                Cell cell = new Cell(data, new PVector(xPos, yPos), value); 
+                Cell cell = new Cell(data.dots, new PVector(xPos, yPos), value); 
                 cells.add(cell);
-                xPos += data.CellSize;
+                xPos += data.dots.CellSize;
               }
     
-              yPos += data.CellSize;
-              xPos = data.CellSize/2;
+              yPos += data.dots.CellSize;
+              xPos = data.dots.CellSize/2;
             }      
             
             points.clear();
             
-            last_CellSize = data.CellSize;           
+            last_CellSize = data.dots.CellSize;           
        }    
     }
     
@@ -138,12 +138,12 @@ class DrawingGenerator
    
     void buildPoints()
     {
-         if (last_DotDensity  != data.DotDensity || 
+         if (last_DotDensity  != data.dots.DotDensity || 
             points.size() == 0)
         {
           
           points.clear();
-          randomSeed(data.seed);
+          randomSeed(data.dots.seed);
           println("build points");
           
           
@@ -152,7 +152,7 @@ class DrawingGenerator
              cells.get(i).BuildPoints(this);
           }
           
-          last_DotDensity = data.DotDensity;
+          last_DotDensity = data.dots.DotDensity;
           
         }
     }
@@ -160,7 +160,7 @@ class DrawingGenerator
     void drawPoints()
     {
       strokeWeight(0);
-      if (data.Black)
+      if (data.dots.Black)
          fill(0);
        else
          fill(255);
