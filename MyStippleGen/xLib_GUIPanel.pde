@@ -19,7 +19,7 @@ class GUIPanel implements ControlListener
   void Init(String pageName)
   {
     this.pageName = pageName;
-    
+    cp5.addTab(pageName);
     cp5.addListener(this);
 
     yPos = StartY;

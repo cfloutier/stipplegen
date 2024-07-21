@@ -1,39 +1,5 @@
 import controlP5.*; 
 
-class DataDots
-{
-    boolean Black = false;
-    float CellSize = 4;
-    float DotDensity = 10;
-    int seed = 0;
-    
-    boolean drawCells = false;
-
-
-    void LoadJson(JSONObject src)
-    {
-        if (src == null)
-          return;
-      
-      
-        Black = src.getBoolean("Black", Black);
-        CellSize = src.getFloat("CellSize", CellSize);
-        DotDensity = src.getFloat("DotDensity", DotDensity);
-        seed = src.getInt("seed", seed);    
-    }
-
-    JSONObject SaveJson()
-    {
-        JSONObject dest = new JSONObject();
-
-
-        dest.setBoolean("Black", Black);
-        dest.setFloat("CellSize", CellSize);
-        dest.setFloat("DotDensity", DotDensity);
-
-        return dest;
-    }
-}
 
 class DataGlobal
 {
@@ -71,11 +37,9 @@ class DataGlobal
         return image.source_file.substring(0, image.source_file.length() - 4);  
     }  
 
-
-
   void LoadJson(String path)
   {
-    print("path" + path);
+    println("loading settings" + path);
     
     JSONObject json = loadJSONObject(path);
 
