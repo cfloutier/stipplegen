@@ -93,5 +93,18 @@ void draw()
 
   //drawer.draw();
 
+  if (data.image.image != null)
+  {
+    //drawer.buildBlurredImage();
+
+    // draw centered 
+    PImage image =  data.image.image; //<>//
+    float image_w = image.width;
+    float image_h = image.height;
+
+    tint(255, data.image.ImageAlpha);  
+    image(image, width/2 - image_w/2, height/2- image_h/2, image_w, image_h);
+  }
+
   end_draw();
 }

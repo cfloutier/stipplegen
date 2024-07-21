@@ -98,7 +98,12 @@ class ImageGUI extends GUIPanel
     {   
         super.Init("Image");
         
-        addButton("SelectSourceImage");
+        // addButton("SelectSourceImage");
+
+        Button select_bt = addButton("Select Source Image");
+        select_bt.plugTo("SelectSourceImage")
+
+
         file_Label = addLabel("File Label");            
         nextLine();
         
@@ -118,7 +123,7 @@ class ImageGUI extends GUIPanel
     }
 }
 
-void SelectSourceImage(float theValue) {  
+void SelectSourceImage() {  
   println(":::LOAD JPG, GIF or PNG FILE:::");
 
   selectInput("Select a file to process:", "imgFileSelected");  // Opens file chooser

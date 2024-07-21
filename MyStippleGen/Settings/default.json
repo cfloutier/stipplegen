@@ -7,12 +7,13 @@
   "Dots": {
     "DotDensity": 1,
     "Black": false,
-    "CellSize": 2
+    "CellSize": 2,
+    "DrawCells": false
   },
   "Image": {
     "Blur": 1,
-    "ImageAlpha": 0,
-    "Width": 200,
+    "ImageAlpha": 255,
+    "Width": 1178,
     "Contrast": 0,
     "source_file": "eye.jpg"
   }
