@@ -1,7 +1,7 @@
 
 void addFileTab()
 {
-  cp5.addTab("Files");
+  cp5.addTab("Settings");
   
   println("addFileTab");
 
@@ -14,14 +14,14 @@ void addFileTab()
   cp5.addButton("LoadJson")
     .setPosition(xPos, yPos)
     .setSize(widthButton, heightButton)
-    .moveTo("Files");        
+    .moveTo("Settings");        
 
   xPos += widthButton;
 
   cp5.addButton("SaveJson")
     .setPosition(xPos, yPos)
     .setSize(widthButton, heightButton)
-    .moveTo("Files");    
+    .moveTo("Settings");    
 
   yPos += heightButton;
   xPos = 0;
@@ -29,7 +29,7 @@ void addFileTab()
   cp5.addButton("ExportPDF")
     .setPosition(xPos, yPos)
     .setSize(widthButton, heightButton)
-    .moveTo("Files");      
+    .moveTo("Settings");      
 
   xPos += widthButton;
 
@@ -44,17 +44,17 @@ void addFileTab()
   cp5.addButton("ExportSVG")
     .setPosition(xPos, yPos)
     .setSize(widthButton, heightButton)
-    .moveTo("Files");    
+    .moveTo("Settings");    
 
   xPos += widthButton;
 }
 
 void LoadJson()
 {
-  print("LoadJson");
+  println("LoadJson");
   
-  File file = new File(".");
-  selectInput("Select data file ", "loadSelected", file);
+  
+  selectInput("Select data file ", "loadSelected", dataFile("../Settings/default.json")  );
 }
 
 void loadSelected(File selection) 
@@ -73,7 +73,7 @@ void loadSelected(File selection)
 
 void SaveJson()
 {
-  selectInput("Save data file ", "saveSelected");
+  selectInput("Save data file ", "saveSelected", dataFile("../Settings/default.json"));
 }
 
 void saveSelected(File selection) 

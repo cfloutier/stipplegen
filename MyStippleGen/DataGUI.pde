@@ -1,7 +1,5 @@
 import controlP5.*;  
 
-
-
 class DataGUI
 {
   public DataGUI(DataGlobal data)

@@ -15,7 +15,6 @@ class DataDots
         if (src == null)
           return;
       
-      
         Black = src.getBoolean("Black", Black);
         DrawCells = src.getBoolean("DrawCells", DrawCells);
         CellSize = src.getFloat("CellSize", CellSize);
@@ -54,6 +53,7 @@ class DotGUI extends GUIPanel
     void setupControls()
     {    
         super.Init("Dots");
+        
         Black = addToggle("Black", "Black Dots", data); 
         nextLine();  
         DrawCells = addToggle("DrawCells", "Draw Cells", data); 

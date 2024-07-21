@@ -1,6 +1,3 @@
-
-String SOURCE_FOLDER = "sourcesImages";
-
 class DataImage
 {
     String source_file = "eye.jpg";
@@ -17,7 +14,8 @@ class DataImage
         this.source_file = source_file;
 
         try {
-          image = loadImage(SOURCE_FOLDER+"/"+source_file);
+          String file_path = dataFile(source_file).getAbsolutePath();
+          image = loadImage(file_path);
           image.filter(GRAY);
         }
         catch(Exception e) {
@@ -79,6 +77,14 @@ class ImageGUI extends GUIPanel
     {
       this.data = data;
     }
+    
+    void SelectSourceImage() {  
+      println(":::LOAD JPG, GIF or PNG FILE:::");
+      
+      //File file = new File("C:/dev/__tracer/stipplegen/MyStippleGen/sourcesImages/");
+    
+      selectInput("Select a file to process:", "imgFileSelected", dataFile(data.source_file));  // Opens file chooser
+    } //End Load File
 
     void update()
     {   
@@ -91,17 +97,29 @@ class ImageGUI extends GUIPanel
     Slider Width;
     Slider ImageAlpha;
     Slider Blur;
+    Button select_bt;
     
     Textlabel file_Label;
+    
+    void test()
+    {
+      print("test");
+    }
     
     void setupControls()
     {   
         super.Init("Image");
         
-        // addButton("SelectSourceImage");
-
-        Button select_bt = addButton("Select Source Image");
-        select_bt.plugTo("SelectSourceImage")
+        select_bt = addButton("Select Source Image");
+        select_bt.plugTo(this, "SelectSourceImage");
+        //select_bt = addButton("Select Source Image");
+        //select_bt.plugTo("LoadJson");
+        
+        
+        // cp5.addButton("LoadJson")
+        // .setPosition(xPos, yPos)
+        // .setSize(200, 200)
+        // .moveTo("Files");    
 
 
         file_Label = addLabel("File Label");            
@@ -122,33 +140,28 @@ class ImageGUI extends GUIPanel
         Blur.setValue(data.Blur);
     }
 }
-
-void SelectSourceImage() {  
-  println(":::LOAD JPG, GIF or PNG FILE:::");
-
-  selectInput("Select a file to process:", "imgFileSelected");  // Opens file chooser
-} //End Load File
-
+ //<>//
+ //<>//
 void imgFileSelected(File selection) {
   if (selection == null) {
     println("Window was closed or the user hit cancel.");
   } else {
-    //println("User selected " + selection.getAbsolutePath());
+    println("User selected " + selection.getAbsolutePath());
 
     String loadPath = selection.getAbsolutePath();
-    loadPath = loadPath.replaceAll("\\", "/");
+    loadPath = loadPath.replaceAll("\\\\", "/");
     String[] p = splitTokens(loadPath, "/");
     String parent_dir = p[p.length - 2];
-    String file_name = p[p.length - 2];
+    String file_name = p[p.length - 1];
     
 
     // If a file was selected, print path to file 
     println("Selected file: " + file_name); 
     println("parent_dir : " + parent_dir); 
-
-    if (parent_dir != SOURCE_FOLDER)
+  
+    if (!parent_dir.equals("data"))
     {
-        println("Invalid Folder. Image must be in "+SOURCE_FOLDER);
+        println("Invalid Folder. Image must be in data path");
         return; 
     }
 
@@ -167,6 +180,6 @@ void imgFileSelected(File selection) {
 
     println("File extension OK: " + fileOK);
 
-    data.image.setImage(loadPath);
+    data.image.setImage(file_name);
   }
 }

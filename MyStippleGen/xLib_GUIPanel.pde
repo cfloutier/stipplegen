@@ -20,6 +20,7 @@ class GUIPanel implements ControlListener
   {
     this.pageName = pageName;
     cp5.addTab(pageName);
+    println("add tab " + pageName);
     cp5.addListener(this);
 
     yPos = StartY;
@@ -89,7 +90,7 @@ class GUIPanel implements ControlListener
 
     return s;
   }
-
+  
   Toggle addToggle(String name, String label, Object data_Class)
   {
     Toggle t = cp5.addToggle(data_Class, name)

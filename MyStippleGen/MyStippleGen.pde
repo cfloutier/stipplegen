@@ -64,7 +64,7 @@ void setup()
   
   setupControls();
    
-  data.LoadJson("./Settings/default.json");
+    data.LoadJson("./Settings/default.json");
   data.name = "default";
 
   dataGui.setGUIValues();
@@ -75,9 +75,10 @@ void setupControls()
 { 
   cp5 = new ControlP5(this); 
   cp5.getTab("default").setLabel("Hide GUI");
-
-  dataGui.setupControls( );     
+  
   addFileTab();
+  dataGui.setupControls( );     
+
 }
 
 void draw()
@@ -98,7 +99,7 @@ void draw()
     //drawer.buildBlurredImage();
 
     // draw centered 
-    PImage image =  data.image.image; //<>//
+    PImage image =  data.image.image;
     float image_w = image.width;
     float image_h = image.height;
 
